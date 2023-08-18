@@ -2,13 +2,13 @@ import React from "react";
 
 const MAX_WORD_LENGTH = 5;
 
-function GuessInput() {
+function GuessInput({ handleNextGuess }) {
   const [guess, setGuess] = React.useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log({ guess });
+    handleNextGuess(guess);
     setGuess("");
   };
 

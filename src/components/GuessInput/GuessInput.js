@@ -1,6 +1,5 @@
 import React from "react";
-
-const MAX_WORD_LENGTH = 5;
+import { MAX_WORD_LENGTH } from "../../constants";
 
 function GuessInput({ handleNextGuess }) {
   const [guess, setGuess] = React.useState("");

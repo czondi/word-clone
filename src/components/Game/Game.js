@@ -9,15 +9,13 @@ import Banner from "../Banner";
 import Keyboard from "../Keyboard";
 import { checkGuess } from "../../game-helpers";
 
-// Pick a random word on every pageload.
-const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
-
 function Game() {
   const [guesses, setGuesses] = React.useState([]);
   const [gameStatus, setGameStatus] = React.useState("running");
   const [checkedGuesses, setCheckedGuesses] = React.useState([]);
+  const [answer, setAnswer] = React.useState(sample(WORDS));
+  // To make debugging easier, we'll log the solution in the console.
+  console.info({ answer });
 
   const handleNextGuess = (nextGuess) => {
     const nextGuesses = [...guesses, nextGuess];
@@ -31,6 +29,13 @@ function Game() {
     } else if (nextGuesses.length === NUM_OF_GUESSES_ALLOWED) {
       setGameStatus("lost");
     }
+  };
+
+  const handleRestartGame = () => {
+    setGuesses([]);
+    setGameStatus("running");
+    setCheckedGuesses([]);
+    setAnswer(sample(WORDS));
   };
 
   return (
@@ -47,6 +52,7 @@ function Game() {
           isHappy={gameStatus === "won"}
           numOfGuesses={guesses.length}
           answer={answer}
+          handleRestartGame={handleRestartGame}
         />
       )}
     </>
